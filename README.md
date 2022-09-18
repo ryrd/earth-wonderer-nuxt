@@ -1,0 +1,1 @@
+recreate https://github.com/ryrd/earth-wonderer with nuxt
