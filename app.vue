@@ -1,7 +1,7 @@
 <template>
   <div>
     <Head>
-      <link rel="icon" type="image/png" href="~/public/Earth-wonderer.png" />
+      <link rel="icon" type="image/png" href="/Earth-wonderer.png" />
       
       <!-- google font -->
       <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -62,5 +62,12 @@ if (process.client) {
           <source src="~/assets/header/day/person-day.png" type="image/png"/>
           <img src="~/assets/header/day/person-day.webp" class='w-full' />
       </picture>
+
+      <div class="absolute bottom-0 h-[80px] md:h-[100px] z-[60] w-full header-gradient"></div>
+
+        <div class='absolute bottom-[3vh] md:bottom-[5vh] left-1/2 -translate-x-1/2 z-[70] font-oswald text-white font-light flex flex-col items-center text-sm md:text-base'>
+            <span class='tracking-wide'>scroll down to explore</span>
+            <img src="~/assets/arrow.svg" alt="scroll down" class='w-6 scroll-down' />
+        </div>
     </div>
 </template>
