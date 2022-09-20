@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+// @ts-ignore
 import HomeHeading from '../parts/HomeHeading.vue';
 </script>
 <template>

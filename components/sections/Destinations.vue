@@ -1,7 +1,7 @@
 <script setup>
 import HomeHeading from '../parts/HomeHeading.vue';
 import DestinationBox from '../parts/DestinationBox.vue';
-import Data from '~/Data';
+import DATA from '~/Data';
 
 </script>
 
@@ -9,12 +9,12 @@ import Data from '~/Data';
     <div>
         <HomeHeading text="Destinations"/>
         <div class='w-full portrait:h-8 landscape:h-12'/>
-        <DestinationBox v-for="dt in Data" 
-                        :key="dt.id"  
-                        :id="dt.id"
-                        :photo="dt.mainPhoto"
-                        :destinationName="dt.name"
-                        :longText="dt.longText"
+        <DestinationBox v-for="data in DATA" 
+                        :key="data.id"  
+                        :id="data.id"
+                        :photo="data.mainPhoto"
+                        :destinationName="data.name"
+                        :longText="data.longText"
                         />
     </div>
 </template>

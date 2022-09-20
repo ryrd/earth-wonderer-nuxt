@@ -5,7 +5,7 @@ interface props {
     destinationName: string,
     longText?: 'long' | 'medium'
 }
-
+// @ts-ignore
 const {id, photo, destinationName, longText} = defineProps<props>();
 </script>
 
