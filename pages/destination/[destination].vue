@@ -1,9 +1,9 @@
+<script setup>
+const route = useRoute();
+</script>
+
 <template>
     <div>
-        destination
+        destination {{route.params.destination}}
     </div>
 </template>
-
-<script setup>
-
-</script>

@@ -43,8 +43,7 @@ if (process.client) {
              id='main-title'>
             <div class='flex items-center justify-center z-10'>
                 <div class='portrait:h-[.3vh] landscape:h-[.5vh] portrait:w-[20vw] landscape:w-[14vw] bg-gradient-to-r from-transparent to-offwhite'/>
-                <h1 class='text-5xl md:text-[5vw] mx-4 z-10' 
-                    contentEditable>
+                <h1 class='text-5xl md:text-[5vw] mx-4 z-10'>
                         Earth
                 </h1>
                 <div class='portrait:h-[.3vh] landscape:h-[.5vh] portrait:w-[20vw] landscape:w-[14vw] bg-gradient-to-l from-transparent to-offwhite'/>
