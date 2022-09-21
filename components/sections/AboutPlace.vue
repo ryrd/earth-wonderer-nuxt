@@ -8,7 +8,8 @@ interface props {
     APlocation: string
 }
 
-const {desc, mapLink, APlocation} = defineProps<props>()
+const {desc, mapLink, APlocation} = defineProps<props>();
+
 </script>
 
 <template>
@@ -19,8 +20,8 @@ const {desc, mapLink, APlocation} = defineProps<props>()
       <div class='portrait:h-auto landscape:h-[60vh] flex portrait:flex-col font-oswald font-light z-10'>
         <div class='h-full landscape:flex-1 flex justify-center items-center portrait:my-6 my-4'>
           <p class='w-[80%] text-[4.3vw] sm:text-[1.5vw] landscape:ml-[10%] dark:text-white
-                        first-letter:text-[12vw] sm:first-letter:text-[4.4vw] first-letter:leading-none 
-                        first-letter:font-kaushan first-letter:mr-[2vw] sm:first-letter:mr-[1vw] first-letter:float-left'>
+                    first-letter:text-[12vw] sm:first-letter:text-[4.4vw] first-letter:leading-none 
+                    first-letter:font-kaushan first-letter:mr-[2vw] sm:first-letter:mr-[1vw] first-letter:float-left'>
             {{desc}}
           </p>
         </div>
@@ -32,7 +33,7 @@ const {desc, mapLink, APlocation} = defineProps<props>()
               {{APlocation}}
             </div>
             <div class='mt-2 w-[100%] sm:w-[80%] portrait:h-[20vh] aspect-[4/3] relative overflow-hidden'>
-              <Map :mapLink="mapLink"/>
+              <Map :maplink="mapLink"/>
             </div>
           </div>
         </div>
