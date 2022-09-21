@@ -1,5 +1,8 @@
 <script setup>
 import Toggle from "../parts/Toggle.vue";
+import { useModeStore } from "../../store/modeStore";
+
+const mode = useModeStore();
 
 const mobile = ref(false);
 
@@ -19,24 +22,26 @@ if (process.client) {
         <span class='absolute top-1/2 left-[20vw] -translate-x-1/2 -translate-y-1/2 z-0 font-oswald font-thin text-dark dark:text-white animate-pulse'>loading...</span>
 
         <div class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 h-full w-full'>
-            <img v-if="mobile" src="~/assets/header/day/bg-picture.jpg" class='h-full object-cover' alt="header-bg-picture" />
-            <video v-else src="~/assets/header/day/bg-day.mp4" id='vid' class='h-full sm:w-screen object-cover'></video>
+            <img v-if="mobile" 
+                 :src="mode.darkMode ? '../../assets/header/night/bg-picture-night.jpg' : '../../assets/header/day/bg-picture.jpg'" class='h-full object-cover' alt="header-bg-picture" />
+            <video v-else 
+                 :src="mode.darkMode ? '../../assets/header/night/bg-night.mp4' : '../../assets/header/day/bg-day.mp4'" id='vid' class='h-full sm:w-screen object-cover'></video>
         </div>
 
         <picture class='absolute -bottom-[2vh] -right-[15vw] w-[150vw] 
                                      sm:-bottom-[10vh] sm:-right-[20vw] sm:w-screen
                             transition duration-300 ease-out md:transition-none z-20'>
-          <source src="~/assets/header/day/mountain-2.webp" type="image/webp"/>
-          <source src="~/assets/header/day/mountain-2.png" type="image/png"/>
-          <img src="~/assets/header/day/mountain-2.webp" class='w-full'/>
+          <source :src="mode.darkMode ? '../../assets/header/night/mountain-2-night.webp' : '../../assets/header/day/mountain-2.webp'" type="image/webp"/>
+          <source :src="mode.darkMode ? '../../assets/header/night/mountain-2-night.png' : '../../assets/header/day/mountain-2.png'" type="image/png"/>
+          <img :src="mode.darkMode ? '../../assets/header/night/mountain-2-night.webp' : '../../assets/header/day/mountain-2.webp'" class='w-full'/>
         </picture>
 
         <picture class='absolute -left-[30vw] -bottom-[10vw] w-[150vw] 
                                      sm:-left-[15vw] sm:-bottom-[13vh] sm:w-screen
                             transition duration-300 ease-out md:transition-none z-30'>
-          <source src="~/assets/header/day/mountain-1.webp" type="image/webp"/>
-          <source src="~/assets/header/day/mountain-1.png" type="image/png"/>
-          <img src="~/assets/header/day/mountain-1.webp" class='w-full'/>
+          <source :src="mode.darkMode ? '../../assets/header/night/mountain-1-night.webp' : '../../assets/header/day/mountain-1.webp'" type="image/webp"/>
+          <source :src="mode.darkMode ? '../../assets/header/night/mountain-1-night.png' : '../../assets/header/day/mountain-1.png'" type="image/png"/>
+          <img :src="mode.darkMode ? '../../assets/header/night/mountain-1-night.png' :'../../assets/header/day/mountain-1.webp'" class='w-full'/>
         </picture>
 
         <div class='absolute top-[15vh] md:top-[13vh] text-white font-anton uppercase text-center left-1/2 -translate-x-1/2 drop-shadow-lg transition duration-700 ease-out z-40 origin-center'
@@ -57,16 +62,16 @@ if (process.client) {
                                      2xl:-left-[1vw] 2xl:-bottom-[17vh] 2xl:w-screen
                             transition duration-300 ease-out md:transition-none z-50'
                       >
-          <source src="~/assets/header/day/person-day.webp" type="image/webp"/>
-          <source src="~/assets/header/day/person-day.png" type="image/png"/>
-          <img src="~/assets/header/day/person-day.webp" class='w-full' />
+          <source :src="mode.darkMode ? '../../assets/header/night/person-night.webp' : '../../assets/header/day/person-day.webp'" type="image/webp"/>
+          <source :src="mode.darkMode ? '../../assets/header/night/person-night.webp' : '../../assets/header/day/person-day.png'" type="image/png"/>
+          <img :src="mode.darkMode ? '../../assets/header/night/person-night.webp' : '../../assets/header/day/person-day.webp'" class='w-full' />
       </picture>
 
-      <div class="absolute bottom-0 h-[80px] md:h-[100px] z-[60] w-full header-gradient"></div>
+      <div :class="`absolute bottom-0 h-[80px] md:h-[100px] z-[60] w-full ${mode.darkMode ? 'header-gradient-dark' : 'header-gradient'}`"></div>
 
         <div class='absolute bottom-[3vh] md:bottom-[5vh] left-1/2 -translate-x-1/2 z-[70] font-oswald text-white font-light flex flex-col items-center text-sm md:text-base'>
             <span class='tracking-wide'>scroll down to explore</span>
-            <img src="~/assets/arrow.svg" alt="scroll down" class='w-6 scroll-down' />
+            <img src="../../assets/arrow.svg" alt="scroll down" class='w-6 scroll-down' />
         </div>
     </div>
 </template>

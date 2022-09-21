@@ -1,7 +1,9 @@
 <script setup lang="ts">
 // @ts-ignore
 import HomeHeading from '../parts/HomeHeading.vue';
+
 </script>
+
 <template>
     <div class='relative h-auto flex justify-center md:justify-start items-center flex-col portrait:pb-[8vh] landscape:pb-[14vh] portrait:pt-8 landscape:pt-[6%]'
          id="aboutImgs">
