@@ -15,9 +15,11 @@ const {id, photo, destinationName, longText} = defineProps<props>();
 const imgRef = ref();
 const imgContainerRef = ref();
 
+let desAnim;
+
 onMounted(() => {
 
-    gsap.to(imgRef.value, {
+    desAnim = gsap.to(imgRef.value, {
     scrollTrigger: {
             trigger: imgContainerRef.value,
             start: 'top bottom',
@@ -30,7 +32,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-    // desAnim.kill()
+    desAnim.kill();
 })
     
 </script>
