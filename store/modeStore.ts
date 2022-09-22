@@ -1,11 +1,13 @@
 import {defineStore} from 'pinia'
 
 const getModeStorage = () => {
-    let darkModeStorage = false;
+    let darkModeStorage: boolean;
 
     if(process.client && localStorage.getItem('darkModeStorage')) {
         darkModeStorage = JSON.parse(localStorage.getItem('darkModeStorage'));
-        if(darkModeStorage === true) window.document.documentElement.classList.add('dark');
+    }
+    else {
+        darkModeStorage = false;
     }
 
     return darkModeStorage;

@@ -18,19 +18,25 @@ const toggleDark = () => {
 onMounted(() => {
     if(localStorage.getItem('toggleClicked') && process.client) {
         const tryIt = document.querySelector('#tryit') as HTMLDivElement;
-        tryIt.style.display = 'none'
+        tryIt.style.display = 'none';
     };
 
-    gsap.from('#toggle', {
+    // gsap.from('#toggle', {
+    //     duration: 1.3,
+    //     delay: .3,
+    //     y: -100,
+    //     ease: "power4.out"
+    // })
+});
+
+const toggleEnter = el => {
+    console.log(el)
+    gsap.from(el, {
         duration: 1.3,
         delay: .3,
         y: -100,
         ease: "power4.out"
     })
-});
-
-const ToggleEnter = el => {
-    console.log(el)
 }
 
 
@@ -38,10 +44,11 @@ const ToggleEnter = el => {
 
 <template>
     <div>
-        <transition appear @enter="ToggleEnter">
+        <transition appear @enter="toggleEnter">
+            <!-- id="toggle" -->
             <button class='bg-black hover:bg-neutral-900 cursor-point bg-opacity-90 w-auto h-12 md:h-16 absolute top-0 right-0 flex justify-center items-center text-white font-oswald font-light tracking-wide text-base md:text-[1.4vw] px-[3vw] md:px-[1.5vw] landscape:lg:py-[3vh] gap-3 z-50'
                     @click="toggleDark"
-                    id="toggle">
+                    >
                 {{!mode.darkMode ? 'dark' : 'light'}} mode
                 <img :src="!mode.darkMode ? '../../assets/moon.svg' : '../../assets/sun.svg'" alt="dark mode toggle" class='h-5 md:h-[2vw]' />
             </button>
