@@ -1,22 +1,84 @@
-<script setup>
+<script setup lang="ts">
 import Toggle from "../parts/Toggle.vue";
 import { useModeStore } from "../../store/modeStore";
+import gsap from 'gsap';
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const mode = useModeStore();
 
 const mobile = ref(false);
 
-//check mobile
-if (process.client) {
+// ------------horizontal parallax variable---------
+const personHorizontalValue = ref(0);
+const mountainOneHorizontalValue = ref(0);
+const mountainTwoHorizontalValue = ref(0);
+
+// imgsrefs
+const personImg = ref();
+const mountainOneImg = ref();
+const mountainTwoImg = ref();
+
+const HeaderRef = ref();
+
+
+onMounted(() => {
+    
+    if (process.client) {
+    //check mobile
     window.innerWidth < 500 ? mobile.value = true : mobile.value = false;
-
+    
+    //-------horizontal parallax-------
+    const horizontalParallax = e => {
+        gsap.set(personImg.value, {
+            xPercent: (e.pageX*-.01)
+        })
+        gsap.set(mountainOneImg.value, {
+            xPercent: (e.pageX*-.0015)
+        })
+        gsap.set(mountainTwoImg.value, {
+            xPercent: (e.pageX*-.001)
+        })
+    }
+    window.innerWidth > 500 && window.addEventListener('mousemove', e => horizontalParallax(e));
+        
+        
+    gsap.to(personImg.value, {
+        scrollTrigger: {
+                trigger: HeaderRef.value,
+                start: 'bottom bottom',
+                end: 'bottom top',
+                scrub: 1.6
+        },
+        yPercent: -20
+    });
+    gsap.to(mountainOneImg.value, {
+        scrollTrigger: {
+                trigger: HeaderRef.value,
+                start: 'bottom bottom',
+                end: 'bottom top',
+                scrub: 1.6
+        },
+        yPercent: -9
+    });
+    gsap.to(mountainTwoImg.value, {
+        scrollTrigger: {
+                trigger: HeaderRef.value,
+                start: 'bottom bottom',
+                end: 'bottom top',
+                scrub: 1.6
+        },
+        yPercent: -5
+    });
 } 
-
+    
+})
 
 </script>
 
 <template>
-    <div class='min-h-[600px] h-[90vh] md:portrait:h-[75vh] md:h-screen relative overflow-hidden'>
+    <div class='min-h-[600px] h-[90vh] md:portrait:h-[75vh] md:h-screen relative overflow-hidden' ref="HeaderRef">
         <Toggle />
 
         <span class='absolute top-1/2 left-[20vw] -translate-x-1/2 -translate-y-1/2 z-0 font-oswald font-thin text-dark dark:text-white animate-pulse'>loading...</span>
@@ -29,16 +91,20 @@ if (process.client) {
         </div>
 
         <picture class='absolute -bottom-[2vh] -right-[15vw] w-[150vw] 
-                                     sm:-bottom-[10vh] sm:-right-[20vw] sm:w-screen
-                            transition duration-300 ease-out md:transition-none z-20'>
+                                 sm:-bottom-[10vh] sm:-right-[20vw] sm:w-screen
+                        transition duration-300 ease-out md:transition-none z-20'
+                ref="mountainTwoImg"
+                >
           <source :src="mode.darkMode ? '../../assets/header/night/mountain-2-night.webp' : '../../assets/header/day/mountain-2.webp'" type="image/webp"/>
           <source :src="mode.darkMode ? '../../assets/header/night/mountain-2-night.png' : '../../assets/header/day/mountain-2.png'" type="image/png"/>
           <img :src="mode.darkMode ? '../../assets/header/night/mountain-2-night.webp' : '../../assets/header/day/mountain-2.webp'" class='w-full'/>
         </picture>
 
         <picture class='absolute -left-[30vw] -bottom-[10vw] w-[150vw] 
-                                     sm:-left-[15vw] sm:-bottom-[13vh] sm:w-screen
-                            transition duration-300 ease-out md:transition-none z-30'>
+                                 sm:-left-[15vw] sm:-bottom-[13vh] sm:w-screen
+                        transition duration-300 ease-out md:transition-none z-30'
+                 ref="mountainOneImg"
+                 >
           <source :src="mode.darkMode ? '../../assets/header/night/mountain-1-night.webp' : '../../assets/header/day/mountain-1.webp'" type="image/webp"/>
           <source :src="mode.darkMode ? '../../assets/header/night/mountain-1-night.png' : '../../assets/header/day/mountain-1.png'" type="image/png"/>
           <img :src="mode.darkMode ? '../../assets/header/night/mountain-1-night.png' :'../../assets/header/day/mountain-1.webp'" class='w-full'/>
@@ -57,11 +123,12 @@ if (process.client) {
         </div>
 
         <picture class='absolute -left-[95vw] -bottom-[25vw] w-[280vw]
-                                     md:portrait:-left-[6vw] md:portrait:-bottom-[5vh] md:portrait:w-[110vw]
-                                     sm:-left-[1vw] sm:-bottom-[17vh] sm:w-screen
-                                     2xl:-left-[1vw] 2xl:-bottom-[17vh] 2xl:w-screen
-                            transition duration-300 ease-out md:transition-none z-50'
-                      >
+                                 md:portrait:-left-[6vw] md:portrait:-bottom-[5vh] md:portrait:w-[110vw]
+                                 sm:-left-[1vw] sm:-bottom-[17vh] sm:w-screen
+                                 2xl:-left-[1vw] 2xl:-bottom-[17vh] 2xl:w-screen
+                        transition duration-300 ease-out md:transition-none z-50'
+                 ref="personImg"
+                >
           <source :src="mode.darkMode ? '../../assets/header/night/person-night.webp' : '../../assets/header/day/person-day.webp'" type="image/webp"/>
           <source :src="mode.darkMode ? '../../assets/header/night/person-night.webp' : '../../assets/header/day/person-day.png'" type="image/png"/>
           <img :src="mode.darkMode ? '../../assets/header/night/person-night.webp' : '../../assets/header/day/person-day.webp'" class='w-full' />
