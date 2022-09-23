@@ -5,12 +5,9 @@ import gsap from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-
 const mode = useModeStore();
-
+const route = useRoute()
 const mobile = ref(false);
-
-
 // imgsrefs
 const personImg = ref();
 const mountainOneImg = ref();
@@ -18,7 +15,6 @@ const mountainTwoImg = ref();
 
 const HeaderRef = ref();
 
-const route = useRoute()
 
 onMounted(() => {
     // ---------video playback variable----------
@@ -97,6 +93,7 @@ onMounted(() => {
         
         }
     }  
+    else return;
 })
 
 </script>

@@ -48,7 +48,7 @@ onMounted(() => {
 
         <div class='try-it w-[25vw] md:w-[10vw] h-16 absolute top-14 md:top-20 right-0 flex flex-col justify-center items-center cursor-point font-oswald font-light text-[#d9d9d9] text-sm md:text-base z-50'
              id="tryit">
-            <img src="~/assets/arrow try.svg" alt="try dark mode img" class='h-6'/>
+            <img src="../../assets/arrow-try.svg" alt="try dark mode img" class='h-6'/>
             try it
         </div>        
     </div>
