@@ -9,28 +9,39 @@ gsap.registerPlugin(ScrollTrigger);
 const aboutImgOne = ref();
 const aboutImgTwo = ref();
 const aboutContainer = ref();
+const route = useRoute()
 
 onMounted(() => {
-  gsap.to(aboutImgOne.value, {
+  if(route.path === '/'){
+    const aboutImgAnim = gsap.timeline({
+      scrollTrigger: {
+          trigger: aboutContainer.value,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.6,
+          // markers: true
+        }
+      })
+      
+      const aboutImgAnim2 = gsap.timeline({
         scrollTrigger: {
-                trigger: aboutContainer.value,
-                start: 'bottom bottom',
-                end: 'bottom top',
-                scrub: 1.6
-        },
-        yPercent: -50,
+          trigger: aboutContainer.value,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.6,
+          // markers: true
+        }
+      })
+      
+      aboutImgAnim.to(aboutImgOne.value, {
+        yPercent: -90,
         rotate: 8
-    });
-    gsap.to(aboutImgTwo.value, {
-        scrollTrigger: {
-                trigger: aboutContainer.value,
-                start: 'bottom bottom',
-                end: 'bottom top',
-                scrub: 1.6
-        },
-        yPercent: -30,
+      });
+      aboutImgAnim2.to(aboutImgTwo.value, {
+        yPercent: -60,
         rotate: -8
-    });
+      });
+    }
 })
 
 </script>

@@ -10,10 +10,6 @@ const mode = useModeStore();
 
 const mobile = ref(false);
 
-// ------------horizontal parallax variable---------
-const personHorizontalValue = ref(0);
-const mountainOneHorizontalValue = ref(0);
-const mountainTwoHorizontalValue = ref(0);
 
 // imgsrefs
 const personImg = ref();
@@ -22,87 +18,85 @@ const mountainTwoImg = ref();
 
 const HeaderRef = ref();
 
-// ---------video playback variable----------
-let accelamount = .1;
-let scrollpos = 0;
-let delay = 0;
+const route = useRoute()
 
 onMounted(() => {
-    
-    // if (process.client) {
-    //     //check mobile
-    //     window.innerWidth < 500 ? mobile.value = true : mobile.value = false;
-        
-    //     //-------horizontal parallax-------
-    //     const horizontalParallax = e => {
-    //         gsap.set(personImg.value, {
-    //             xPercent: ((e.pageX*-.01)-2.5)+5
-    //         })
-    //         gsap.set(mountainOneImg.value, {
-    //             xPercent: ((e.pageX*-.0015)-.125)+.25
-    //         })
-    //         gsap.set(mountainTwoImg.value, {
-    //             xPercent: ((e.pageX*-.001)-.075)+.15
-    //         })
-    //     }
-    //     window.innerWidth > 500 && window.addEventListener('mousemove', e => horizontalParallax(e));
+    // ---------video playback variable----------
+    if (process.client) {
+        if(route.path === '/'){
+            let accelamount = .1;
+            let scrollpos = 0;
+            let delay = 0;
             
-    //     // ----------vertical parallax----------
-    //     gsap.to(personImg.value, {
-    //         scrollTrigger: {
-    //                 trigger: HeaderRef.value,
-    //                 start: 'bottom bottom',
-    //                 end: 'bottom top',
-    //                 scrub: 1.6
-    //         },
-    //         yPercent: -20
-    //     });
-    //     gsap.to(mountainOneImg.value, {
-    //         scrollTrigger: {
-    //                 trigger: HeaderRef.value,
-    //                 start: 'bottom bottom',
-    //                 end: 'bottom top',
-    //                 scrub: 1.6
-    //         },
-    //         yPercent: -9
-    //     });
-    //     gsap.to(mountainTwoImg.value, {
-    //         scrollTrigger: {
-    //                 trigger: HeaderRef.value,
-    //                 start: 'bottom bottom',
-    //                 end: 'bottom top',
-    //                 scrub: 1.6
-    //         },
-    //         yPercent: -5
-    //     });
+            //check mobile
+            window.innerWidth < 500 ? mobile.value = true : mobile.value = false;
+            
+            //-------horizontal parallax-------
+            const horizontalParallax = e => {
+            gsap.set(personImg.value, {
+                xPercent: ((e.pageX*-.01)-2.5)+5
+            })
+            gsap.set(mountainOneImg.value, {
+                xPercent: ((e.pageX*-.0015)-.125)+.25
+            })
+            gsap.set(mountainTwoImg.value, {
+                xPercent: ((e.pageX*-.001)-.075)+.15
+            })
+        }
+        window.innerWidth > 500 && window.addEventListener('mousemove', e => horizontalParallax(e));
+        
+        // ----------vertical parallax----------
+        gsap.to(personImg.value, {
+            scrollTrigger: {
+                    trigger: HeaderRef.value,
+                    start: 'bottom bottom',
+                    end: 'bottom top',
+                    scrub: 1.6
+                },
+                yPercent: -20
+            });
+            gsap.to(mountainOneImg.value, {
+                scrollTrigger: {
+                    trigger: HeaderRef.value,
+                    start: 'bottom bottom',
+                    end: 'bottom top',
+                    scrub: 1.6
+                },
+                yPercent: -9
+            });
+        gsap.to(mountainTwoImg.value, {
+            scrollTrigger: {
+                trigger: HeaderRef.value,
+                    start: 'bottom bottom',
+                    end: 'bottom top',
+                    scrub: 1.6
+                },
+                yPercent: -5
+            });
 
-    //     //-----------video play on scroll-----------
-    //     //select bg video
-    //     const vid = document.querySelector('#vid') as any;
-    //     //set delay/current playback value
-    //     const scrollplay = () => {
-    //         delay += (scrollpos-delay)*accelamount;
-    //         vid.currentTime = delay;
-    //     }
-    //     //set scrollY value function
-    //     const setScrollPos = () => scrollpos = window.scrollY/120;
-    //     window.addEventListener('scroll', () => {
-    //         window.innerWidth > 500 && setScrollPos();
-    //     });
-    //     //interval for video scroll animation
-    //     const videoInterval = setInterval(() => {
-    //         if (scrollpos < 3) scrollplay()
-    //         else return
-    //     }, 33.33);
-    //     //remove video scroll animation on mobile
-    //     window.innerWidth < 500 && clearInterval(videoInterval);
-
-    // }    
-})
-
-onUnmounted(() => {
-    // window.removeEventListener('scroll', () => {});
-    // window.removeEventListener('mousemove', () => {});
+            //-----------video play on scroll-----------
+            //select bg video
+            const vid = document.querySelector('#vid') as any;
+            //set delay/current playback value
+            const scrollplay = () => {
+                delay += (scrollpos-delay)*accelamount;
+                vid.currentTime = delay;
+            }
+            //set scrollY value function
+            const setScrollPos = () => scrollpos = window.scrollY/120;
+            window.addEventListener('scroll', () => {
+                window.innerWidth > 500 && setScrollPos();
+            });
+            //interval for video scroll animation
+            const videoInterval = setInterval(() => {
+                if (scrollpos < 3) scrollplay()
+                else return
+            }, 33.33);
+            //remove video scroll animation on mobile
+            window.innerWidth < 500 && clearInterval(videoInterval);
+        
+        }
+    }  
 })
 
 </script>

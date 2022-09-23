@@ -15,26 +15,26 @@ const {id, photo, destinationName, longText} = defineProps<props>();
 const imgRef = ref();
 const imgContainerRef = ref();
 
-let desAnim;
+const route = useRoute()
 
 onMounted(() => {
-
-    desAnim = gsap.to(imgRef.value, {
-    scrollTrigger: {
-            trigger: imgContainerRef.value,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 2
-        },
-        yPercent: 15,
-    });
-
+    if(route.path === '/'){
+        const DesBoxAnim = gsap.timeline({
+            scrollTrigger: {
+                trigger: imgContainerRef.value,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1.5,
+                // markers: true
+            },
+        })
+        
+        DesBoxAnim.to(imgRef.value, {
+            yPercent: 15,
+        });
+    } 
 });
 
-onUnmounted(() => {
-    desAnim.kill();
-})
-    
 </script>
 
 <template>
