@@ -4,6 +4,8 @@ import { useModeStore } from "../../store/modeStore";
 import gsap from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 
+const {indexBody} = defineProps<{indexBody: any}>();
+
 gsap.registerPlugin(ScrollTrigger);
 const mode = useModeStore();
 const route = useRoute()
@@ -16,7 +18,7 @@ const HeaderRef = ref();
 
 
 onMounted(() => {
-    console.log(route)
+    Node.getRootNode();
     // ---------video playback variable----------
     if (process.client) {
         if(route.path === '/'){
@@ -98,7 +100,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-    
+
 })
 
 </script>
@@ -116,7 +118,7 @@ onUnmounted(() => {
                  alt="header-bg-picture" />
             <video v-else 
                  :src="mode.darkMode ? '../../assets/header/night/bg-night.mp4' : '../../assets/header/day/bg-day.mp4'" 
-                 id='vid' ref="vidRef"
+                 id="vid"
                  class='h-full sm:w-screen object-cover'></video>
         </div>
 

@@ -9,7 +9,7 @@ const mode = useModeStore();
 </script>
 
 <template>
-    <div :class="mode.darkMode ? 'bg-night' : 'bg-light'" ref="indexRef">
+    <div :class="mode.darkMode ? 'bg-night' : 'bg-light'">
         <Header/>
         <AboutSite />
         <Destinations/>     
