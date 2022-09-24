@@ -4,17 +4,14 @@ import { useModeStore } from './store/modeStore';
 const mode = useModeStore();
 
 onMounted(() => {
-  if(process.client && localStorage.getItem('darkModeStorage')) {
-    if(JSON.parse(localStorage.getItem('darkModeStorage')) === true) {
+  if(process.client && localStorage.getItem('darkModeStorage') && JSON.parse(localStorage.getItem('darkModeStorage')) === true) {
       window.document.documentElement.classList.add('dark')
       mode.darkMode = true;
-    };
   }
 })
 </script>
 
 <template>
-  <div>
     <Head>
       <link rel="icon" type="image/png" href="/earth-wonderer.png" />
       
@@ -33,5 +30,4 @@ onMounted(() => {
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-  </div>
 </template>

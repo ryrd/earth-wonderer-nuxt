@@ -20,7 +20,10 @@ const selectedPhoto = ref('');
 const setSelectedPhoto = photo => selectedPhoto.value = photo;
 
 onMounted(() => {
-    if(process.client) window.scrollTo(0, 0);
+    if(process.client) {
+        window.scrollTo(0, 0);
+    };
+    
 })
 
 </script>

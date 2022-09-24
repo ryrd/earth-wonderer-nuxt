@@ -5,25 +5,20 @@ import gsap from 'gsap';
 const mode = useModeStore();
 
 const toggleRef = ref();
+const tryItRef = ref();
 
 const toggleDark = () => {
-    if (process.client) {
-        const tryIt = document.querySelector('#tryit') as HTMLDivElement;
-        window.document.documentElement.classList.toggle('dark');
-        mode.toggleMode();
-        tryIt.style.display = 'none';
-        localStorage.setItem('darkModeStorage', JSON.stringify(mode.darkMode));
-        localStorage.setItem('toggleClicked', 'true');
-    }
+    window.document.documentElement.classList.toggle('dark');
+    mode.toggleMode();
+    tryItRef.value.style.display = 'none';
+    localStorage.setItem('darkModeStorage', JSON.stringify(mode.darkMode));
+    if(!localStorage.getItem('toggleClicked')) localStorage.setItem('toggleClicked', 'true');
 }
 
 const toggleAnim = gsap.timeline()
 
 onMounted(() => {
-    if(localStorage.getItem('toggleClicked') && process.client) {
-        const tryIt = document.querySelector('#tryit') as HTMLDivElement;
-        tryIt.style.display = 'none';
-    };
+    if(localStorage.getItem('toggleClicked')) tryItRef.value.style.display = 'none';
 
     toggleAnim.from(toggleRef.value, {
         duration: 1.3,
@@ -47,7 +42,8 @@ onMounted(() => {
         </button>
 
         <div class='try-it w-[25vw] md:w-[10vw] h-16 absolute top-14 md:top-20 right-0 flex flex-col justify-center items-center cursor-point font-oswald font-light text-[#d9d9d9] text-sm md:text-base z-50'
-             id="tryit">
+             id="tryit"
+             ref="tryItRef">
             <img src="../../assets/arrow-try.svg" alt="try dark mode img" class='h-6'/>
             try it
         </div>        

@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const aboutImgOne = ref();
 const aboutImgTwo = ref();
 const aboutContainer = ref();
-const route = useRoute()
+const route = useRoute();
 
 onMounted(() => {
   if(route.path === '/'){

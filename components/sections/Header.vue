@@ -12,11 +12,11 @@ const mobile = ref(false);
 const personImg = ref();
 const mountainOneImg = ref();
 const mountainTwoImg = ref();
-
 const HeaderRef = ref();
 
 
 onMounted(() => {
+    console.log(route)
     // ---------video playback variable----------
     if (process.client) {
         if(route.path === '/'){
@@ -25,29 +25,31 @@ onMounted(() => {
             let delay = 0;
             
             //check mobile
-            window.innerWidth < 500 ? mobile.value = true : mobile.value = false;
+            window.addEventListener('resize', () => {
+                window.innerWidth < 500 ? mobile.value = true : mobile.value = false;
+            }) 
             
             //-------horizontal parallax-------
             const horizontalParallax = e => {
-            gsap.set(personImg.value, {
-                xPercent: ((e.pageX*-.01)-2.5)+5
-            })
-            gsap.set(mountainOneImg.value, {
-                xPercent: ((e.pageX*-.0015)-.125)+.25
-            })
-            gsap.set(mountainTwoImg.value, {
-                xPercent: ((e.pageX*-.001)-.075)+.15
-            })
-        }
-        window.innerWidth > 500 && window.addEventListener('mousemove', e => horizontalParallax(e));
-        
-        // ----------vertical parallax----------
-        gsap.to(personImg.value, {
-            scrollTrigger: {
-                    trigger: HeaderRef.value,
-                    start: 'bottom bottom',
-                    end: 'bottom top',
-                    scrub: 1.6
+                gsap.set(personImg.value, {
+                    xPercent: ((e.pageX*-.01)-2.5)+5
+                })
+                gsap.set(mountainOneImg.value, {
+                    xPercent: ((e.pageX*-.0015)-.125)+.25
+                })
+                gsap.set(mountainTwoImg.value, {
+                    xPercent: ((e.pageX*-.001)-.075)+.15
+                })
+            }
+            window.innerWidth > 500 && HeaderRef.value.addEventListener('mousemove', e => horizontalParallax(e));
+            
+            // ----------vertical parallax----------
+            gsap.to(personImg.value, {
+                scrollTrigger: {
+                        trigger: HeaderRef.value,
+                        start: 'bottom bottom',
+                        end: 'bottom top',
+                        scrub: 1.6
                 },
                 yPercent: -20
             });
@@ -60,12 +62,12 @@ onMounted(() => {
                 },
                 yPercent: -9
             });
-        gsap.to(mountainTwoImg.value, {
-            scrollTrigger: {
-                trigger: HeaderRef.value,
-                    start: 'bottom bottom',
-                    end: 'bottom top',
-                    scrub: 1.6
+            gsap.to(mountainTwoImg.value, {
+                scrollTrigger: {
+                    trigger: HeaderRef.value,
+                        start: 'bottom bottom',
+                        end: 'bottom top',
+                        scrub: 1.6
                 },
                 yPercent: -5
             });
@@ -92,8 +94,11 @@ onMounted(() => {
             window.innerWidth < 500 && clearInterval(videoInterval);
         
         }
-    }  
-    else return;
+    }
+});
+
+onUnmounted(() => {
+    
 })
 
 </script>
@@ -111,7 +116,7 @@ onMounted(() => {
                  alt="header-bg-picture" />
             <video v-else 
                  :src="mode.darkMode ? '../../assets/header/night/bg-night.mp4' : '../../assets/header/day/bg-day.mp4'" 
-                 id='vid' 
+                 id='vid' ref="vidRef"
                  class='h-full sm:w-screen object-cover'></video>
         </div>
 
