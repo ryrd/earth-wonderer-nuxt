@@ -4,7 +4,8 @@ import { useModeStore } from "../../store/modeStore";
 import gsap from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-const {indexBody} = defineProps<{indexBody: any}>();
+// const {indexBody} = defineProps<{indexBody: any}>();
+// const 
 
 gsap.registerPlugin(ScrollTrigger);
 const mode = useModeStore();
@@ -16,12 +17,14 @@ const mountainOneImg = ref();
 const mountainTwoImg = ref();
 const HeaderRef = ref();
 
+const vidRef = ref();
+
 
 onMounted(() => {
-    Node.getRootNode();
     // ---------video playback variable----------
     if (process.client) {
         if(route.path === '/'){
+            
             let accelamount = .1;
             let scrollpos = 0;
             let delay = 0;
@@ -73,28 +76,28 @@ onMounted(() => {
                 },
                 yPercent: -5
             });
-
-            //-----------video play on scroll-----------
-            //select bg video
-            const vid = document.querySelector('#vid') as any;
-            //set delay/current playback value
-            const scrollplay = () => {
-                delay += (scrollpos-delay)*accelamount;
-                vid.currentTime = delay;
+            if(document.querySelector('#vid')){
+                //-----------video play on scroll-----------
+                //select bg video
+                const vid = document.querySelector('#vid') as any;
+                //set delay/current playback value
+                const scrollplay = () => {
+                    delay += (scrollpos-delay)*accelamount;
+                    vid.currentTime = delay;
+                }
+                //set scrollY value function
+                const setScrollPos = () => scrollpos = window.scrollY/120;
+                window.addEventListener('scroll', () => {
+                    window.innerWidth > 500 && setScrollPos();
+                });
+                //interval for video scroll animation
+                const videoInterval = setInterval(() => {
+                    if (scrollpos < 3) scrollplay()
+                    else return
+                }, 33.33);
+                //remove video scroll animation on mobile
+                window.innerWidth < 500 && clearInterval(videoInterval);
             }
-            //set scrollY value function
-            const setScrollPos = () => scrollpos = window.scrollY/120;
-            window.addEventListener('scroll', () => {
-                window.innerWidth > 500 && setScrollPos();
-            });
-            //interval for video scroll animation
-            const videoInterval = setInterval(() => {
-                if (scrollpos < 3) scrollplay()
-                else return
-            }, 33.33);
-            //remove video scroll animation on mobile
-            window.innerWidth < 500 && clearInterval(videoInterval);
-        
         }
     }
 });
@@ -118,7 +121,7 @@ onUnmounted(() => {
                  alt="header-bg-picture" />
             <video v-else 
                  :src="mode.darkMode ? '../../assets/header/night/bg-night.mp4' : '../../assets/header/day/bg-day.mp4'" 
-                 id="vid"
+                 id="vid" ref="vidRef"
                  class='h-full sm:w-screen object-cover'></video>
         </div>
 

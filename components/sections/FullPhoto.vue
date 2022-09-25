@@ -12,19 +12,26 @@ const fullPhotoContainer = ref();
 const fullPhoto = ref();
 const fullPhotoClose = ref();
 
-const fullPhotoAnim = gsap.timeline()
+// const fullPhotoAnim = gsap.timeline()
+
+// const fullPhotoEnter = (el: HTMLImageElement) => {
+//   console.log(el)
+//   gsap.from(el, {
+//     scale: .1
+//   })
+// }
 
 onMounted(() => {
-  fullPhotoAnim
-    .from(fullPhotoContainer.value, {
-      opacity: 0
-    })
-    .from(fullPhoto.value, {
-      scale: .1
-    })
-    .from(fullPhotoClose.value, {
-      scale: .1
-    })
+  // fullPhotoAnim
+    // .from(fullPhotoContainer.value, {
+    //   opacity: 0
+    // })
+    // .from(fullPhoto.value, {
+    //   scale: .1
+    // })
+    // .from(fullPhotoClose.value, {
+    //   scale: .1
+    // })
 });
 
 </script>
@@ -35,11 +42,13 @@ onMounted(() => {
          @click.self="setSelectedPhoto"
          ref="fullPhotoContainer"
          >
-      <img :src="`${selectedPhoto}`"
-            class='w-auto h-auto max-w-[90%] max-h-[90%] object-contain cursor-cursor'
-            alt="full selected photo"
-            ref="fullPhoto"
-            />
+      <transition name="fullphoto">
+        <img :src="`${selectedPhoto}`"
+              class='w-auto h-auto max-w-[90%] max-h-[90%] object-contain cursor-cursor'
+              alt="full selected photo"
+              ref="fullPhoto"
+              />      
+      </transition>
       <button class='absolute top-[5vh] portrait:left-[3vw] landscape:left-[5vw] w-10 cursor-point'
               @click.self="setSelectedPhoto"
               ref="fullPhotoClose"
@@ -49,3 +58,16 @@ onMounted(() => {
       </button>
     </div>
 </template>
+
+<style>
+  
+  .fullphoto-enter-from,
+  .fullphoto-leave-to{
+    scale: .5;
+  }
+
+  .fullphoto-enter-active,
+  .fullphoto-leave-active{
+    transition: .7s ease-out;
+  }
+</style>

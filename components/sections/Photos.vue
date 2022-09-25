@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import DetailHeading from '../parts/DetailHeading.vue';
-// @ts-ignore
 import PhotoBox from './PhotoBox.vue';
 
 interface props {

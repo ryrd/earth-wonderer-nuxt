@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import gsap from 'gsap';
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
   image: string,
@@ -10,6 +13,8 @@ interface Props {
 const {image, DetailHeaderName, DetailHeadinglocation} = defineProps<Props>()
 
 const route = useRouter();
+
+const detailImg = ref();
 
 onMounted(() => {
     if(process.client && document.querySelector('#back')) {
@@ -24,8 +29,17 @@ onMounted(() => {
             opacity: 0,
             ease: "power4.out"
         });
-}
-
+    }
+    gsap.to(detailImg.value, {
+        scrollTrigger: {
+            trigger: detailImg.value,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.6,
+            // markers: true
+        },
+        scale: 1.2
+    })
 });
 </script>
 
@@ -34,6 +48,7 @@ onMounted(() => {
         <img class='z-0 object-cover w-full h-full' 
             :src="image"
             alt="heading img"
+            ref="detailImg"
             />
                 
         <div class='absolute w-auto portrait:min-h-[10vh] landscape:h-[25vh] z-10 left-0 bottom-0 bg-dark text-white bg-opacity-10 backdrop-blur flex flex-col justify-center pl-5 pr-6 md:pl-12 md:pr-14 tracking-wide'>
