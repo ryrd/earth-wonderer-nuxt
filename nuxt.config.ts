@@ -3,8 +3,11 @@ export default defineNuxtConfig({
     css: ["~/assets/css/style.css"],
     build: {
         postcss: {
-        postcssOptions: require("./postcss.config.js"),
+            postcssOptions: require("./postcss.config.js"),
         },
+        transpile: [
+            "gsap"
+        ]
     },
     modules: [
         '@pinia/nuxt'

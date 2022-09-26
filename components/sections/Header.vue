@@ -19,12 +19,11 @@ const HeaderRef = ref();
 
 const vidRef = ref();
 
-
 onMounted(() => {
-    // ---------video playback variable----------
     if (process.client) {
         if(route.path === '/'){
             
+            // ---------video playback variable----------
             let accelamount = .1;
             let scrollpos = 0;
             let delay = 0;
@@ -37,13 +36,13 @@ onMounted(() => {
             //-------horizontal parallax-------
             const horizontalParallax = e => {
                 gsap.set(personImg.value, {
-                    xPercent: ((e.pageX*-.01)-2.5)+5
+                    x: ((e.pageX*-.1)-2.5)+5
                 })
                 gsap.set(mountainOneImg.value, {
-                    xPercent: ((e.pageX*-.0015)-.125)+.25
+                    x: ((e.pageX*-.015)-.125)+.25
                 })
                 gsap.set(mountainTwoImg.value, {
-                    xPercent: ((e.pageX*-.001)-.075)+.15
+                    x: ((e.pageX*-.01)-.075)+.15
                 })
             }
             window.innerWidth > 500 && HeaderRef.value.addEventListener('mousemove', e => horizontalParallax(e));
@@ -87,8 +86,22 @@ onMounted(() => {
                 }
                 //set scrollY value function
                 const setScrollPos = () => scrollpos = window.scrollY/120;
-                window.addEventListener('scroll', () => {
+                window.addEventListener('scroll', (e) => {
                     window.innerWidth > 500 && setScrollPos();
+                    window.scrollY > 5 && document.querySelector('#main-title') && gsap.to('#main-title', {
+                        yPercent: -100,
+                        opacity: 0,
+                        filter: 'blur(15px)',
+                        duration: .7,
+                        ease: 'Power4.easeOut',
+                    })
+                    window.scrollY < 5 && document.querySelector('#main-title') && gsap.to('#main-title', {
+                        yPercent: 0,
+                        opacity: 1,
+                        filter: 'blur(0px)',
+                        duration: .7,
+                        ease: 'Power4.easeOut',
+                    })
                 });
                 //interval for video scroll animation
                 const videoInterval = setInterval(() => {
@@ -102,10 +115,6 @@ onMounted(() => {
     }
 });
 
-onUnmounted(() => {
-
-})
-
 </script>
 
 <template>
@@ -116,11 +125,11 @@ onUnmounted(() => {
 
         <div class='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 h-full w-full'>
             <img v-if="mobile" 
-                 :src="mode.darkMode ? '../../assets/header/night/bg-picture-night.jpg' : '../../assets/header/day/bg-picture.jpg'" 
+                 :src="mode.darkMode ? '/_nuxt/assets/header/night/bg-picture-night.jpg' : '/_nuxt/assets/header/day/bg-picture.jpg'" 
                  class='h-full object-cover' 
                  alt="header-bg-picture" />
             <video v-else 
-                 :src="mode.darkMode ? '../../assets/header/night/bg-night.mp4' : '../../assets/header/day/bg-day.mp4'" 
+                 :src="mode.darkMode ? '/_nuxt/assets/header/night/bg-night.mp4' : '/_nuxt/assets/header/day/bg-day.mp4'" 
                  id="vid" ref="vidRef"
                  class='h-full sm:w-screen object-cover'></video>
         </div>
@@ -130,9 +139,9 @@ onUnmounted(() => {
                         transition duration-300 ease-out md:transition-none z-20'
                 ref="mountainTwoImg"
                 >
-          <source :src="mode.darkMode ? '../../assets/header/night/mountain-2-night.webp' : '../../assets/header/day/mountain-2.webp'" type="image/webp"/>
-          <source :src="mode.darkMode ? '../../assets/header/night/mountain-2-night.png' : '../../assets/header/day/mountain-2.png'" type="image/png"/>
-          <img :src="mode.darkMode ? '../../assets/header/night/mountain-2-night.webp' : '../../assets/header/day/mountain-2.webp'" class='w-full'/>
+          <source :src="mode.darkMode ? '/_nuxt/assets/header/night/mountain-2-night.webp' : '/_nuxt/assets/header/day/mountain-2.webp'" type="image/webp"/>
+          <source :src="mode.darkMode ? '/_nuxt/assets/header/night/mountain-2-night.png' : '/_nuxt/assets/header/day/mountain-2.png'" type="image/png"/>
+          <img :src="mode.darkMode ? '/_nuxt/assets/header/night/mountain-2-night.webp' : '/_nuxt/assets/header/day/mountain-2.webp'" class='w-full'/>
         </picture>
 
         <picture class='absolute -left-[30vw] -bottom-[10vw] w-[150vw] 
@@ -140,9 +149,9 @@ onUnmounted(() => {
                         transition duration-300 ease-out md:transition-none z-30'
                  ref="mountainOneImg"
                  >
-          <source :src="mode.darkMode ? '../../assets/header/night/mountain-1-night.webp' : '../../assets/header/day/mountain-1.webp'" type="image/webp"/>
-          <source :src="mode.darkMode ? '../../assets/header/night/mountain-1-night.png' : '../../assets/header/day/mountain-1.png'" type="image/png"/>
-          <img :src="mode.darkMode ? '../../assets/header/night/mountain-1-night.png' :'../../assets/header/day/mountain-1.webp'" class='w-full'/>
+          <source :src="mode.darkMode ? '/_nuxt/assets/header/night/mountain-1-night.webp' : '/_nuxt/assets/header/day/mountain-1.webp'" type="image/webp"/>
+          <source :src="mode.darkMode ? '/_nuxt/assets/header/night/mountain-1-night.png' : '/_nuxt/assets/header/day/mountain-1.png'" type="image/png"/>
+          <img :src="mode.darkMode ? '/_nuxt/assets/header/night/mountain-1-night.png' :'/_nuxt/assets/header/day/mountain-1.webp'" class='w-full'/>
         </picture>
 
         <div class='absolute top-[15vh] md:top-[13vh] text-white font-anton uppercase text-center left-1/2 -translate-x-1/2 drop-shadow-lg transition duration-700 ease-out z-40 origin-center'
@@ -164,16 +173,16 @@ onUnmounted(() => {
                         transition duration-300 ease-out md:transition-none z-50'
                  ref="personImg"
                 >
-          <source :src="mode.darkMode ? '../../assets/header/night/person-night.webp' : '../../assets/header/day/person-day.webp'" type="image/webp"/>
-          <source :src="mode.darkMode ? '../../assets/header/night/person-night.webp' : '../../assets/header/day/person-day.png'" type="image/png"/>
-          <img :src="mode.darkMode ? '../../assets/header/night/person-night.webp' : '../../assets/header/day/person-day.webp'" class='w-full' />
+          <source :src="mode.darkMode ? '/_nuxt/assets/header/night/person-night.webp' : '/_nuxt/assets/header/day/person-day.webp'" type="image/webp"/>
+          <source :src="mode.darkMode ? '/_nuxt/assets/header/night/person-night.webp' : '/_nuxt/assets/header/day/person-day.png'" type="image/png"/>
+          <img :src="mode.darkMode ? '/_nuxt/assets/header/night/person-night.webp' : '/_nuxt/assets/header/day/person-day.webp'" class='w-full' />
       </picture>
 
       <div :class="`absolute bottom-0 h-[80px] md:h-[100px] z-[60] w-full ${mode.darkMode ? 'header-gradient-dark' : 'header-gradient'}`"></div>
 
         <div class='absolute bottom-[3vh] md:bottom-[5vh] left-1/2 -translate-x-1/2 z-[70] font-oswald text-white font-light flex flex-col items-center text-sm md:text-base'>
             <span class='tracking-wide'>scroll down to explore</span>
-            <img src="../../assets/arrow.svg" alt="scroll down" class='w-6 scroll-down' />
+            <img src="/_nuxt/assets/arrow.svg" alt="scroll down" class='w-6 scroll-down' />
         </div>
     </div>
 </template>

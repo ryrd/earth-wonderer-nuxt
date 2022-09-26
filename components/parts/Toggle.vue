@@ -38,13 +38,13 @@ onMounted(() => {
                 ref="toggleRef"
                 >
             {{!mode.darkMode ? 'dark' : 'light'}} mode
-            <img :src="!mode.darkMode ? '../../assets/moon.svg' : '../../assets/sun.svg'" alt="dark mode toggle" class='h-5 md:h-[2vw]' />
+            <img :src="!mode.darkMode ? '/_nuxt/assets/moon.svg' : '/_nuxt/assets/sun.svg'" alt="dark mode toggle" class='h-5 md:h-[2vw]' />
         </button>
 
         <div class='try-it w-[25vw] md:w-[10vw] h-16 absolute top-14 md:top-20 right-0 flex flex-col justify-center items-center cursor-point font-oswald font-light text-[#d9d9d9] text-sm md:text-base z-50'
              id="tryit"
              ref="tryItRef">
-            <img src="../../assets/arrow-try.svg" alt="try dark mode img" class='h-6'/>
+            <img src="/_nuxt/assets/arrow-try.svg" alt="try dark mode img" class='h-6'/>
             try it
         </div>        
     </div>

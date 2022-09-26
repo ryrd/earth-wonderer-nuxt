@@ -7,6 +7,7 @@ import Video from '~~/components/sections/Video.vue';
 import Photos from '~~/components/sections/Photos.vue';
 import FullPhoto from '~~/components/sections/FullPhoto.vue';
 import { useModeStore } from '~~/store/modeStore';
+import PageTransitionOpen from '~~/components/parts/PageTransitionOpen.vue';
 
 const route = useRoute();
 
@@ -36,5 +37,9 @@ onMounted(() => {
         <Photos :photos="data.photos" :photosId="data.id" @set-selected-photo="setSelectedPhoto" />
 
         <FullPhoto :selectedPhoto="selectedPhoto" @set-selected-photo="setSelectedPhoto" />
+
+        <!-- not working -->
+        <!-- <PageTransitionOpen direction="home"/>
+        <PageTransitionClose from="home"/> -->
     </div>
 </template>
