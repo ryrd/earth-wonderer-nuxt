@@ -57,7 +57,7 @@ if(process.client){
       
         <!-- pace js -->
       <Script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></Script>
-      <link rel="stylesheet" href="./public/loading-bar.css">
+      <link rel="stylesheet" href="/loading-bar.css">
           
       <Title>EARTH WONDERER</Title>
     </Head>

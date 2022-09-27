@@ -60,7 +60,7 @@ onMounted(() => {
 
       <div class="absolute top-0 h-[120px] w-full bg-gradient-to-b from-offwhite dark:from-dark to-transparent"></div>
       
-      <img src="/_nuxt/assets/about/about2.webp" ref="aboutImgOne" class='absolute -right-[8%] md:right-[12%] top-[45%] md:top-[35%] w-28 md:w-[16vw] z-0 about-shadow' />
-      <img src="/_nuxt/assets/about/about1.webp" ref="aboutImgTwo" class='absolute -left-[5%] md:left-[13%] bottom-[0%] md:bottom-[2%] w-24 md:w-[14vw] z-0 about-shadow' />
+      <img src="~/assets/about/about2.webp" ref="aboutImgOne" class='absolute -right-[8%] md:right-[12%] top-[45%] md:top-[35%] w-28 md:w-[16vw] z-0 about-shadow' />
+      <img src="~/assets/about/about1.webp" ref="aboutImgTwo" class='absolute -left-[5%] md:left-[13%] bottom-[0%] md:bottom-[2%] w-24 md:w-[14vw] z-0 about-shadow' />
     </div>
 </template>
