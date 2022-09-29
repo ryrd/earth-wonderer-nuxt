@@ -29,6 +29,7 @@ onMounted(() => {
             let delay = 0;
             
             //check mobile
+            window.innerWidth < 500 ? mobile.value = true : mobile.value = false;
             window.addEventListener('resize', () => {
                 window.innerWidth < 500 ? mobile.value = true : mobile.value = false;
             }) 
